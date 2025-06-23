@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polteksi Mental Health - Konseling Kesehatan Mental Mahasiswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'CustomFonts', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #667eea;
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+            padding: 2rem 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: rgb(255, 255, 255);
+        }
+
+        .feature-card h3 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #718096;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #718096;
+        }
+
+        .close:hover {
+            color: #4a5568;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        /* Chat Interface */
+        .chat-container {
+            height: 400px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f7fafc;
+        }
+
+        .chat-input-container {
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Mood Tracker */
+        .mood-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+
+        .mood-btn {
+            background: none;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mood-btn:hover,
+        .mood-btn.selected {
+            border-color: #667eea;
+            background: #667eea;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Emergency Button */
+        .emergency-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
+            animation: pulse 2s infinite;
+            z-index: 1500;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(229, 62, 62, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
+            }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #e2e8f0;
+            border-radius: 10px;
+            padding: 3px;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 20px;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+        }
+
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #718096;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+<header>
+    <img src="https://polteksi.info/images/logo/logo1.png" style="height:70px; background-color: transparent; border-radius: 50%;">
+</header>
+            <ul class="nav-menu">
+                <li><a href="#home">BERANDA</a></li>  <!-- Navigasi sederhana untuk akses cepat -->
+                <li><a href="#fitur">FITUR</a></li>
+                <li><a href="#tentang">TENTANG</a></li>
+                <li><a href="#kontak">KONTAK</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero" id="home">
+                <h1>SELAMAT DATANG DI POLTEKSI RUANG BICARA</h1> <!-- Pesan selamat datang yang ramah untuk pengguna terautentikasi -->
+                <p>PLATFORM KONSELING KESEHATAN MENTAL UNTUK MENDUKUNG KESEJAHTERAAN SEMUA KALANGAN MAHASISWA</p>
+                <a href="#" class="cta-button" onclick="openModal('consultationModal')">MULAI KONSULTASI</a>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features" id="fitur">
+                <h2>FITUR LAYANAN KAMI</h2>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="openModal('consultationModal')">
+                        <div class="feature-icon">🗣️</div>
+                        <h3>Konsultasi Online</h3>
+                        <p>Sesi konseling dengan psikolog profesional melalui chat atau video call</p>
+                        <button class="btn">MULAI KONSULTASI</button>
+                    </div>
+
+                    <div class="feature-card" onclick="openModal('moodModal')">
+                        <div class="feature-icon">📊</div>
+                        <h3>Mood Tracker</h3>
+                        <p>Pantau perubahan mood dan emosi harian untuk memahami pola kesehatan mental</p>
+                        <button class="btn">Lacak Mood</button>
+                    </div>
+
+                    <div class="feature-card" onclick="openModal('assessmentModal')">
+                        <div class="feature-icon">📝</div>
+                        <h3>Self Assessment</h3>
+                        <p>Evaluasi kondisi kesehatan mental dengan kuesioner tervalidasi</p>
+                        <button class="btn">Mulai Tes</button>
+                    </div>
+
+                    <div class="feature-card" onclick="openModal('resourcesModal')">
+                        <div class="feature-icon">📚</div>
+                        <h3>Pustaka Edukasi</h3>
+                        <p>Artikel, video, dan materi edukatif tentang kesehatan mental</p>
+                        <button class="btn">Jelajahi</button>
+                    </div>
+
+                    <div class="feature-card" onclick="openModal('journalModal')">
+                        <div class="feature-icon">📖</div>
+                        <h3>Jurnal Harian</h3>
+                        <p>Tulis dan refleksikan pengalaman harian untuk insight diri</p>
+                        <button class="btn">Tulis Jurnal</button>
+                    </div>
+
+                    <div class="feature-card" onclick="openModal('chatbotModal')">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI Assistant</h3>
+                        <p>Chatbot AI untuk dukungan awal dan informasi kesehatan mental</p>
+                        <button class="btn">Chat Sekarang</button>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalUsers">1,247</div>
+                        <div class="stat-label">Mahasiswa Terdaftar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalSessions">3,891</div>
+                        <div class="stat-label">Sesi Konseling</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="satisfaction">4.8</div>
+                        <div class="stat-label">Rating Kepuasan</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="response">< 24h</div>
+                        <div class="stat-label">Waktu Respons</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Emergency Button -->
+    <button class="emergency-btn" onclick="openModal('emergencyModal')" title="Bantuan Darurat">🚨</button>
+
+    <!-- Modals -->
+    
+    <!-- Consultation Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('consultationModal')">&times;</span>
+            <h2>Konsultasi Online</h2>
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="nim">NIM:</label>
+                    <input type="text" id="nim" name="nim" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultationType">Jenis Konsultasi:</label>
+                    <select id="consultationType" name="consultationType" required>
+                        <option value="">Pilih jenis konsultasi</option>
+                        <option value="stress">Manajemen Stress</option>
+                        <option value="anxiety">Kecemasan</option>
+                        <option value="depression">Depresi</option>
+                        <option value="academic">Masalah Akademik</option>
+                        <option value="relationship">Hubungan Interpersonal</option>
+                        <option value="other">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="urgency">Tingkat Urgensi:</label>
+                    <select id="urgency" name="urgency" required>
+                        <option value="">Pilih tingkat urgensi</option>
+                        <option value="low">Rendah (1-2 minggu)</option>
+                        <option value="medium">Sedang (3-5 hari)</option>
+                        <option value="high">Tinggi (dalam 24 jam)</option>
+                        <option value="emergency">Darurat (segera)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Deskripsi Masalah:</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Jelaskan secara singkat masalah yang ingin dikonsultasikan"></textarea>
+                </div>
+                <button type="submit" class="btn">Kirim Permohonan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="moodModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('moodModal')">&times;</span>
+            <h2>Mood Tracker Harian</h2>
+            <p>Bagaimana perasaan Anda hari ini?</p>
+            <div class="mood-options">
+                <button class="mood-btn" data-mood="very-sad" title="Sangat Sedih">😢</button>
+                <button class="mood-btn" data-mood="sad" title="Sedih">😔</button>
+                <button class="mood-btn" data-mood="neutral" title="Biasa Saja">😐</button>
+                <button class="mood-btn" data-mood="happy" title="Senang">😊</button>
+                <button class="mood-btn" data-mood="very-happy" title="Sangat Senang">😄</button>
+            </div>
+            <div class="form-group">
+                <label for="moodNote">Catatan (Opsional):</label>
+                <textarea id="moodNote" placeholder="Apa yang membuat Anda merasa seperti ini?"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="energy">Tingkat Energi (1-10):</label>
+                <input type="range" id="energy" min="1" max="10" value="5">
+                <span id="energyValue">5</span>
+            </div>
+            <button class="btn" onclick="saveMood()">Simpan Mood</button>
+            
+            <!-- Mood History -->
+            <h3>Riwayat Mood (7 Hari Terakhir)</h3>
+            <div id="moodHistory" class="mood-history"></div>
+        </div>
+    </div>
+
+    <!-- Assessment Modal -->
+    <div id="assessmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('assessmentModal')">&times;</span>
+            <h2>Self Assessment Kesehatan Mental</h2>
+            <p>Silakan jawab pertanyaan berikut dengan jujur. Semua jawaban bersifat rahasia.</p>
+            <div id="assessmentContainer">
+                <div class="progress-container">
+                    <div class="progress-bar" id="assessmentProgress" style="width: 0%"></div>
+                </div>
+                <div id="questionContainer">
+                    <!-- Questions will be loaded here -->
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>Sebelumnya</button>
+                    <button class="btn" id="nextBtn" onclick="nextQuestion()">Selanjutnya</button>
+                </div>
+            </div>
+            <div id="assessmentResult" style="display: none;">
+                <h3>Hasil Assessment</h3>
+                <div id="resultContent"></div>
+                <button class="btn" onclick="restartAssessment()">Ulangi Tes</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="resourcesModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('resourcesModal')">&times;</span>
+            <h2>Pustaka Edukasi Kesehatan Mental</h2>
+            <div class="resources-container">
+                <div class="resource-category">
+                    <h3>📄 Artikel Terbaru</h3>
+                    <ul>
+                        <li><a href="#" onclick="showResource('stress-management')">Mengelola Stress di Masa Kuliah</a></li>
+                        <li><a href="#" onclick="showResource('sleep-hygiene')">Pentingnya Tidur yang Berkualitas</a></li>
+                        <li><a href="#" onclick="showResource('social-anxiety')">Mengatasi Kecemasan Sosial</a></li>
+                        <li><a href="#" onclick="showResource('mindfulness')">Teknik Mindfulness untuk Pemula</a></li>
+                    </ul>
+                </div>
+                <div class="resource-category">
+                    <h3>🎥 Video Edukasi</h3>
+                    <ul>
+                        <li><a href="#" onclick="showResource('breathing-exercise')">Latihan Pernapasan untuk Relaksasi</a></li>
+                        <li><a href="#" onclick="showResource('time-management')">Manajemen Waktu yang Efektif</a></li>
+                        <li><a href="#" onclick="showResource('self-care')">Rutina Self-Care Harian</a></li>
+                    </ul>
+                </div>
+                <div class="resource-category">
+                    <h3>🧘 Latihan Mindfulness</h3>
+                    <ul>
+                        <li><a href="#" onclick="showResource('meditation-guide')">Panduan Meditasi 5 Menit</a></li>
+                        <li><a href="#" onclick="showResource('body-scan')">Teknik Body Scan</a></li>
+                        <li><a href="#" onclick="showResource('gratitude')">Jurnal Gratitude</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="resourceContent" style="display: none;">
+                <button class="btn btn-secondary" onclick="backToResources()">← Kembali</button>
+                <div id="resourceDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journal Modal -->
+    <div id="journalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('journalModal')">&times;</span>
+            <h2>Jurnal Harian</h2>
+            <div id="journalContainer">
+                <div class="form-group">
+                    <label for="journalDate">Tanggal:</label>
+                    <input type="date" id="journalDate" name="journalDate">
+                </div>
+                <div class="form-group">
+                    <label for="journalTitle">Judul (Opsional):</label>
+                    <input type="text" id="journalTitle" placeholder="Berikan judul untuk jurnal hari ini">
+                </div>
+                <div class="form-group">
+                    <label for="journalContent">Isi Jurnal:</label>
+                    <textarea id="journalContent" rows="6" placeholder="Tuliskan pengalaman, perasaan, atau refleksi hari ini..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="gratitude">3 Hal yang Disyukuri Hari Ini:</label>
+                    <textarea id="gratitude" rows="3" placeholder="1. &#10;2. &#10;3. "></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tomorrow">Target untuk Besok:</label>
+                    <textarea id="tomorrow" rows="2" placeholder="Apa yang ingin dicapai besok?"></textarea>
+                </div>
+                <button class="btn" onclick="saveJournal()">Simpan Jurnal</button>
+                <button class="btn btn-secondary" onclick="showJournalHistory()">Lihat Riwayat</button>
+            </div>
+            <div id="journalHistory" style="display: none;">
+                <button class="btn btn-secondary" onclick="backToJournal()">← Tulis Baru</button>
+                <h3>Riwayat Jurnal</h3>
+                <div id="journalList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('chatbotModal')">&times;</span>
+            <h2>AI Assistant - Polteksi Mental Health</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">
+                        <strong>AI Assistant:</strong> Halo! Saya adalah asisten AI untuk kesehatan mental Polteksi. Bagaimana saya bisa membantu Anda hari ini? 😊
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan Anda..." onkeypress="handleChatKeyPress(event)">
+                    <button class="btn" onclick="sendMessage()">Kirim</button>
+                </div>
+            </div>
+            <div class="quick-responses">
+                <p><strong>Topik Umum:</strong></p>
+                <button class="btn btn-secondary" onclick="sendQuickMessage('Saya merasa stress dengan tugas kuliah')">Stress Akademik</button>
+                <button class="btn btn-secondary" onclick="sendQuickMessage('Saya sulit tidur')">Masalah Tidur</button>
+                <button class="btn btn-secondary" onclick="sendQuickMessage('Saya merasa cemas')">Kecemasan</button>
+                <button class="btn btn-secondary" onclick="sendQuickMessage('Tips manajemen waktu')">Manajemen Waktu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('emergencyModal')">&times;</span>
+            <h2 style="color: #e53e3e;">🚨 Bantuan Darurat</h2>
+            <p><strong>Jika Anda dalam keadaan darurat atau membutuhkan bantuan segera:</strong></p>
+            
+            <div class="emergency-contacts">
+                <div class="emergency-card">
+                    <h3>📞 Hotline Darurat</h3>
+                    <p><strong>Hotline Kesehatan Mental 24/7:</strong></p>
+                    <p style="font-size: 1.5rem; color: #e53e3e;"></p>
+                    <button class="btn" onclick="window.open('tel:119')">Hubungi Sekarang</button>
+                </div>
+                
+                <div class="emergency-card">
+                    <h3>🏥 Konselor Darurat Polteksi</h3>
+                    <p><strong>Dr. Luqman Hakim Firdaus, M.Psi</strong></p>
+                    <p>WhatsApp: 0822-2835-3625</p>
+                    <button class="btn" onclick="window.open('https://wa.me/6282228353625?text=Halo%20Dr.%20Sarah,%20saya%20mahasiswa%20Polteksi%20yang%20membutuhkan%20bantuan%20darurat')">Chat WhatsApp</button>
+                </div>
+            </div>
+            
+            <div class="crisis-resources">
+                <h3>📋 Penilaian Risiko Cepat</h3>
+                <p>Apakah Anda mengalami salah satu dari kondisi berikut?</p>
+                <div class="crisis-checklist">
+                    <label><input type="checkbox" id="suicidal"> Pikiran untuk menyakiti diri sendiri</label>
+                    <label><input type="checkbox" id="panic"> Serangan panik yang parah</label>
+                    <label><input type="checkbox" id="danger"> Merasa dalam bahaya</label>
+                    <label><input type="checkbox" id="substance"> Penggunaan zat berbahaya</label>
+                </div>
+                <button class="btn" onclick="assessCrisis()" style="background: #e53e3e;">Evaluasi Kondisi</button>
+            </div>
+        </div>
+    </div>
+    <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'CustomFonts', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #783599, #5a0b5ae4);
+      color: #333;
+    }
+    @font-face {
+    font-family: 'CustomFonts';
+    src: url('fonts/CallingCode-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    }
+   .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      color: #2b6cb0;
+    }
+    .section {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .section h2 {
+      color: #2b6cb0;
+    }
+    .section h3 {
+      color: #b83280;
+    }
+    .section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .section li::before {
+      content: '✔';
+      color: #48bb78;
+      margin-right: 0.5rem;
+    }
+    .section a {
+      color: #2b6cb0;
+      text-decoration: none;
+    }
+    .section a:hover {
+      text-decoration: underline;
+    }
+    .section img {
+      display: block;
+      margin: 1rem auto;
+      width: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <section id="tentang" class="section">
+      <h2>TENTANG KAMI</h2>
+      <p>
+        Polteksi Mental Health adalah platform pendampingan kesehatan mental khusus untuk mahasiswa Politeknik Siber dan Sandi Negara. Kami percaya bahwa kesejahteraan mental adalah fondasi penting untuk kesuksesan akademik dan kehidupan pribadi.
+      </p>
+      <ul>
+        <li>Konsultasi psikolog daring gratis</li>
+        <li>Pelacakan mood dan jurnal harian</li>
+        <li>Self-assessment mental yang tervalidasi</li>
+        <li>Materi edukatif dan dukungan peer-to-peer</li>
+      </ul>
+    </section>
+    <section id="kontak" class="section">
+      <h3>KONTAK KAMI</h3>
+      <p>Untuk pertanyaan, konsultasi, atau kerja sama, silakan hubungi kami melalui:</p>
+      <ul>
+        <li>Email: <a href="medkompati98@gmail.com">medkompati98@gmail.com</a></li>
+        <li>WhatsApp: <a href="https://wa.me/6282228353625" target="_blank">0822-2835-3625</a></li>
+        <li>WhatsApp 2: <a href="https://wa.me/6282146784783" target="_blank">0821-4678-4783</a></li>
+        <li>Instagram: <a href="https://instagram.com/luqmanwp" target="_blank">@luqmanwp</a></li>
+        <li>Instagram: <a href="https://instagram.com/nartyr_" target="_blank">@nartyr_</a></li>
+      </ul>
+    </section>
+    <footer style="width: 100%; background-color: #f0f0f0; padding: 20px; text-align: center; border: 2px solid #333; box-sizing: border-box; margin-top: 20px;">
+        <h3>HERE WE ARE</h3>
+        <p>SEMESTER 2</p>
+        <p>D3 TEKNOLOGI INFORMASI</p>
+        <p>POLTEKSI</p>
+        <p>LUQMAN HAKIM FIRDAUS / RAJU TRISNA YURIRANITASARI</p>
+</footer>
+  </main>
+    <script>
+        // Global Variables
+        let currentUser = {
+            name: '',
+            nim: '',
+            moodHistory: [],
+            journalEntries: [],
+            assessmentScores: []
+        };
+
+        let assessmentQuestions = [
+            {
+                question: "Seberapa sering Anda merasa sedih atau tertekan dalam 2 minggu terakhir?",
+                options: ["Tidak pernah", "Beberapa hari", "Lebih dari setengah hari", "Hampir setiap hari"],
+                scores: [0, 1, 2, 3]
+            },
+            {
+                question: "Seberapa sering Anda kehilangan minat pada aktivitas yang biasanya Anda nikmati?",
+                options: ["Tidak pernah", "Beberapa hari", "Lebih dari setengah hari", "Hampir setiap hari"],
+                scores: [0, 1, 2, 3]
+            },
+            {
+                question: "Bagaimana kualitas tidur Anda akhir-akhir ini?",
+                options: ["Sangat baik", "Baik", "Buruk", "Sangat buruk"],
+                scores: [0, 1, 2, 3]
+            },
+            {
+                question: "Seberapa sering Anda merasa cemas atau khawatir berlebihan?",
+                options: ["Tidak pernah", "Kadang-kadang", "Sering", "Hampir selalu"],
+                scores: [0, 1, 2, 3]
+            },
+            {
+                question: "Bagaimana kemampuan Anda berkonsentrasi pada tugas kuliah?",
+                options: ["Sangat baik", "Baik", "Menurun", "Sangat sulit"],
+                scores: [0, 1, 2, 3]
+            },
+            {
+                question: "Seberapa sering Anda merasa lelah atau kekurangan energi?",
+                options: ["Jarang", "Kadang-kadang", "Sering", "Hampir selalu"],
+                scores: [0, 1, 2, 3]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let assessmentAnswers = [];
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Initialize specific modal content
+            if (modalId === 'moodModal') {
+                initializeMoodTracker();
+            } else if (modalId === 'assessmentModal') {
+                initializeAssessment();
+            } else if (modalId === 'journalModal') {
+                initializeJournal();
+            } else if (modalId === 'chatbotModal') {
+                initializeChatbot();
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Consultation Form Handler
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const consultationData = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            alert('Permohonan konsultasi Anda telah dikirim! Tim kami akan menghubungi Anda dalam waktu maksimal 24 jam.');
+            
+            // Store user data
+            currentUser.name = consultationData.name;
+            currentUser.nim = consultationData.nim;
+            
+            // Clear form
+            e.target.reset();
+            closeModal('consultationModal');
+            
+            // Show confirmation with estimated response time
+            showConsultationConfirmation(consultationData.urgency);
+        });
+
+        function showConsultationConfirmation(urgency) {
+            let responseTime = '';
+            switch(urgency) {
+                case 'emergency':
+                    responseTime = 'dalam 1 jam';
+                    break;
+                case 'high':
+                    responseTime = 'dalam 24 jam';
+                    break;
+                case 'medium':
+                    responseTime = 'dalam 3-5 hari';
+                    break;
+                default:
+                    responseTime = 'dalam 1-2 minggu';
+            }
+            
+            setTimeout(() => {
+                alert(`Berdasarkan tingkat urgensi yang Anda pilih, konselor akan menghubungi Anda ${responseTime}. Silakan periksa email dan WhatsApp secara berkala.`);
+            }, 1000);
+        }
+
+        // Mood Tracker Functions
+        function initializeMoodTracker() {
+            const today = new Date().toISOString().split('T')[0];
+            loadMoodHistory();
+            
+            // Set today's date as default
+            const moodButtons = document.querySelectorAll('.mood-btn');
+            moodButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    moodButtons.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Energy slider
+            const energySlider = document.getElementById('energy');
+            const energyValue = document.getElementById('energyValue');
+            
+            energySlider.addEventListener('input', function() {
+                energyValue.textContent = this.value;
+            });
+        }
+
+        function saveMood() {
+            const selectedMood = document.querySelector('.mood-btn.selected');
+            const moodNote = document.getElementById('moodNote').value;
+            const energyLevel = document.getElementById('energy').value;
+            
+            if (!selectedMood) {
+                alert('Silakan pilih mood Anda terlebih dahulu!');
+                return;
+            }
+            
+            const moodData = {
+                date: new Date().toISOString().split('T')[0],
+                mood: selectedMood.dataset.mood,
+                note: moodNote,
+                energy: parseInt(energyLevel),
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save to mood history
+            currentUser.moodHistory.push(moodData);
+            
+            // Update display
+            loadMoodHistory();
+            
+            // Clear form
+            document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('selected'));
+            document.getElementById('moodNote').value = '';
+            document.getElementById('energy').value = 5;
+            document.getElementById('energyValue').textContent = '5';
+            
+            alert('Mood berhasil disimpan! Terima kasih telah melacak perasaan Anda.');
+        }
+
+        function loadMoodHistory() {
+            const historyContainer = document.getElementById('moodHistory');
+            const recentMood = currentUser.moodHistory.slice(-7); // Last 7 days
+            
+            if (recentMood.length === 0) {
+                historyContainer.innerHTML = '<p>Belum ada data mood. Mulai lacak mood Anda hari ini!</p>';
+                return;
+            }
+            
+            let historyHTML = '<div style="display: flex; gap: 10px; flex-wrap: wrap;">';
+            recentMood.forEach(mood => {
+                const moodEmoji = getMoodEmoji(mood.mood);
+                historyHTML += `
+                    <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px; text-align: center; min-width: 80px;">
+                        <div style="font-size: 2rem;">${moodEmoji}</div>
+                        <div style="font-size: 0.8rem; color: #718096;">${formatDate(mood.date)}</div>
+                        <div style="font-size: 0.8rem; color: #4a5568;">Energi: ${mood.energy}/10</div>
+                    </div>
+                `;
+            });
+            historyHTML += '</div>';
+            
+            historyContainer.innerHTML = historyHTML;
+        }
+
+        function getMoodEmoji(mood) {
+            const emojis = {
+                'very-sad': '😢',
+                'sad': '😔',
+                'neutral': '😐',
+                'happy': '😊',
+                'very-happy': '😄'
+            };
+            return emojis[mood] || '😐';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
+        }
+
+        // Assessment Functions
+        function initializeAssessment() {
+            currentQuestionIndex = 0;
+            assessmentAnswers = [];
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = assessmentQuestions[currentQuestionIndex];
+            const questionContainer = document.getElementById('questionContainer');
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                optionsHTML += `
+                    <label style="display: block; margin: 10px 0; cursor: pointer;">
+                        <input type="radio" name="answer" value="${index}" style="margin-right: 10px;">
+                        ${option}
+                    </label>
+                `;
+            });
+            
+            questionContainer.innerHTML = `
+                <h3>Pertanyaan ${currentQuestionIndex + 1} dari ${assessmentQuestions.length}</h3>
+                <p><strong>${question.question}</strong></p>
+                <div style="margin: 20px 0;">
+                    ${optionsHTML}
+                </div>
+            `;
+            
+            // Update progress bar
+            const progress = ((currentQuestionIndex + 1) / assessmentQuestions.length) * 100;
+            document.getElementById('assessmentProgress').style.width = progress + '%';
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentQuestionIndex === assessmentQuestions.length - 1 ? 'Selesai' : 'Selanjutnya';
+        }
+
+        function nextQuestion() {
+            const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+            
+            if (!selectedAnswer) {
+                alert('Silakan pilih salah satu jawaban!');
+                return;
+            }
+            
+            // Save answer
+            assessmentAnswers[currentQuestionIndex] = parseInt(selectedAnswer.value);
+            
+            if (currentQuestionIndex < assessmentQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                showAssessmentResult();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                
+                // Restore previous answer if exists
+                if (assessmentAnswers[currentQuestionIndex] !== undefined) {
+                    const previousAnswer = assessmentAnswers[currentQuestionIndex];
+                    document.querySelector(`input[name="answer"][value="${previousAnswer}"]`).checked = true;
+                }
+            }
+        }
+
+        function showAssessmentResult() {
+            // Calculate total score
+            let totalScore = 0;
+            assessmentAnswers.forEach((answerIndex, questionIndex) => {
+                totalScore += assessmentQuestions[questionIndex].scores[answerIndex];
+            });
+            
+            // Determine result category
+            let resultCategory, resultMessage, recommendations;
+            
+            if (totalScore <= 5) {
+                resultCategory = 'Baik';
+                resultMessage = 'Kondisi kesehatan mental Anda tergolong baik. Pertahankan pola hidup sehat!';
+                recommendations = [
+                    'Lanjutkan aktivitas fisik rutin',
+                    'Jaga pola tidur yang teratur',
+                    'Pertahankan hubungan sosial yang positif',
+                    'Praktikkan teknik relaksasi sederhana'
+                ];
+            } else if (totalScore <= 10) {
+                resultCategory = 'Perlu Perhatian';
+                resultMessage = 'Ada beberapa aspek yang perlu diperhatikan. Pertimbangkan untuk melakukan konsultasi.';
+                recommendations = [
+                    'Mulai jurnal harian untuk refleksi diri',
+                    'Coba teknik manajemen stress',
+                    'Pertimbangkan konsultasi dengan konselor',
+                    'Jaga rutinitas harian yang sehat'
+                ];
+            } else {
+                resultCategory = 'Perlu Bantuan Profesional';
+                resultMessage = 'Hasil menunjukkan Anda mungkin memerlukan dukungan profesional. Silakan hubungi konselor.';
+                recommendations = [
+                    'Segera hubungi konselor atau psikolog',
+                    'Jangan ragu untuk mencari bantuan',
+                    'Bicarakan dengan orang terpercaya',
+                    'Gunakan layanan konsultasi darurat jika diperlukan'
+                ];
+            }
+            
+            // Save result
+            currentUser.assessmentScores.push({
+                date: new Date().toISOString(),
+                score: totalScore,
+                category: resultCategory
+            });
+            
+            // Display result
+            document.getElementById('assessmentContainer').style.display = 'none';
+            document.getElementById('assessmentResult').style.display = 'block';
+            
+            const resultContent = document.getElementById('resultContent');
+            resultContent.innerHTML = `
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">
+                        ${resultCategory === 'Baik' ? '😊' : resultCategory === 'Perlu Perhatian' ? '😐' : '😟'}
+                    </div>
+                    <h3 style="color: ${resultCategory === 'Baik' ? '#38a169' : resultCategory === 'Perlu Perhatian' ? '#d69e2e' : '#e53e3e'};">
+                        ${resultCategory}
+                    </h3>
+                    <p style="margin: 15px 0;">${resultMessage}</p>
+                    <div style="background: #f7fafc; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                        <p><strong>Skor Anda: ${totalScore}/18</strong></p>
+                    </div>
+                </div>
+                
+                <h4>Rekomendasi:</h4>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    ${recommendations.map(rec => `<li style="margin: 5px 0;">${rec}</li>`).join('')}
+                </ul>
+                
+                ${totalScore > 10 ? `
+                <div style="background: #fed7d7; border: 1px solid #fc8181; border-radius: 8px; padding: 15px; margin: 20px 0;">
+                    <p><strong>⚠️ Catatan Penting:</strong> Hasil ini hanya sebagai panduan awal. Untuk evaluasi yang lebih akurat, silakan konsultasi dengan profesional kesehatan mental.</p>
+                </div>
+                ` : ''}
+            `;
+            
+            // Show consultation button if needed
+            if (totalScore > 5) {
+                resultContent.innerHTML += `
+                    <button class="btn" onclick="closeModal('assessmentModal'); openModal('consultationModal');" style="margin: 20px 10px 0 0;">
+                        Konsultasi Sekarang
+                    </button>
+                `;
+            }
+        }
+
+        function restartAssessment() {
+            document.getElementById('assessmentResult').style.display = 'none';
+            document.getElementById('assessmentContainer').style.display = 'block';
+            initializeAssessment();
+        }
+
+        // Journal Functions
+        function initializeJournal() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('journalDate').value = today;
+            
+            // Show journal writing interface
+            document.getElementById('journalContainer').style.display = 'block';
+            document.getElementById('journalHistory').style.display = 'none';
+        }
+
+        function saveJournal() {
+            const date = document.getElementById('journalDate').value;
+            const title = document.getElementById('journalTitle').value;
+            const content = document.getElementById('journalContent').value;
+            const gratitude = document.getElementById('gratitude').value;
+            const tomorrow = document.getElementById('tomorrow').value;
+            
+            if (!date || !content.trim()) {
+                alert('Silakan isi tanggal dan isi jurnal!');
+                return;
+            }
+            
+            const journalEntry = {
+                date: date,
+                title: title || `Jurnal ${formatDate(date)}`,
+                content: content,
+                gratitude: gratitude,
+                tomorrow: tomorrow,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Check if entry for this date already exists
+            const existingIndex = currentUser.journalEntries.findIndex(entry => entry.date === date);
+            
+            if (existingIndex !== -1) {
+                if (confirm('Sudah ada jurnal untuk tanggal ini. Apakah Anda ingin menimpanya?')) {
+                    currentUser.journalEntries[existingIndex] = journalEntry;
+                } else {
+                    return;
+                }
+            } else {
+                currentUser.journalEntries.push(journalEntry);
+            }
+            
+            // Clear form
+            document.getElementById('journalTitle').value = '';
+            document.getElementById('journalContent').value = '';
+            document.getElementById('gratitude').value = '';
+            document.getElementById('tomorrow').value = '';
+            
+            alert('Jurnal berhasil disimpan! 📝');
+        }
+
+        function showJournalHistory() {
+            document.getElementById('journalContainer').style.display = 'none';
+            document.getElementById('journalHistory').style.display = 'block';
+            
+            const journalList = document.getElementById('journalList');
+            
+            if (currentUser.journalEntries.length === 0) {
+                journalList.innerHTML = '<p>Belum ada jurnal tersimpan. Mulai tulis jurnal pertama Anda!</p>';
+                return;
+            }
+            
+            // Sort by date (newest first)
+            const sortedEntries = [...currentUser.journalEntries].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let historyHTML = '';
+            sortedEntries.forEach((entry, index) => {
+                historyHTML += `
+                    <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin: 10px 0; background: white;">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                            <h4 style="color: #4a5568; margin: 0;">${entry.title}</h4>
+                            <span style="color: #718096; font-size: 0.9rem;">${formatDate(entry.date)}</span>
+                        </div>
+                        <p style="color: #718096; margin-bottom: 10px; max-height: 60px; overflow: hidden;">
+                            ${entry.content.substring(0, 150)}${entry.content.length > 150 ? '...' : ''}
+                        </p>
+                        <button class="btn btn-secondary" onclick="viewJournalEntry(${index})" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                            Baca Selengkapnya
+                        </button>
+                    </div>
+                `;
+            });
+            
+            journalList.innerHTML = historyHTML;
+        }
+
+        function viewJournalEntry(index) {
+            const sortedEntries = [...currentUser.journalEntries].sort((a, b) => new Date(b.date) - new Date(a.date));
+            const entry = sortedEntries[index];
+            
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h2>${entry.title}</h2>
+                    <p style="color: #718096; margin-bottom: 20px;">${formatDate(entry.date)}</p>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <h4>Isi Jurnal:</h4>
+                        <p style="white-space: pre-line; background: #f7fafc; padding: 15px; border-radius: 8px;">${entry.content}</p>
+                    </div>
+                    
+                    ${entry.gratitude ? `
+                    <div style="margin-bottom: 20px;">
+                        <h4>Hal yang Disyukuri:</h4>
+                        <p style="white-space: pre-line; background: #f0fff4; padding: 15px; border-radius: 8px;">${entry.gratitude}</p>
+                    </div>
+                    ` : ''}
+                    
+                    ${entry.tomorrow ? `
+                    <div style="margin-bottom: 20px;">
+                        <h4>Target Besok:</h4>
+                        <p style="white-space: pre-line; background: #eff6ff; padding: 15px; border-radius: 8px;">${entry.tomorrow}</p>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function backToJournal() {
+            document.getElementById('journalHistory').style.display = 'none';
+            document.getElementById('journalContainer').style.display = 'block';
+        }
+
+        // Chatbot Functions
+        function initializeChatbot() {
+            // Initialize chat if not already done
+            if (document.getElementById('chatMessages').children.length <= 1) {
+                setTimeout(() => {
+                    addBotMessage("Saya bisa membantu Anda dengan berbagai topik seperti manajemen stress, tips tidur, teknik relaksasi, dan banyak lagi. Apa yang ingin Anda diskusikan?");
+                }, 1000);
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addUserMessage(message);
+            input.value = '';
+            
+            // Simulate bot response
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addBotMessage(response);
+            }, 1000);
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('chatInput').value = message;
+            sendMessage();
+        }
+
+        function addUserMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `<strong>Anda:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addBotMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            messageDiv.innerHTML = `<strong>AI Assistant:</strong> ${message}`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Stress-related responses
+            if (lowerMessage.includes('stress') || lowerMessage.includes('tertekan')) {
+                return `Saya memahami Anda sedang mengalami stress. Berikut beberapa tips yang bisa membantu:
+
+• **Teknik Pernapasan 4-7-8**: Tarik napas 4 hitungan, tahan 7 hitungan, hembuskan 8 hitungan
+• **Buat prioritas**: Tulis daftar tugas dan urutkan berdasarkan kepentingan
+• **Istirahat aktif**: Lakukan jalan kaki 10-15 menit
+• **Bicara dengan teman**: Berbagi masalah dapat meringankan beban
+
+Apakah ada aspek tertentu dari stress yang ingin Anda diskusikan lebih lanjut?`;
+            }
+            
+            // Sleep-related responses
+            if (lowerMessage.includes('tidur') || lowerMessage.includes('insomnia') || lowerMessage.includes('susah tidur')) {
+                return `Masalah tidur sangat umum dialami mahasiswa. Berikut tips untuk tidur yang lebih berkualitas:
+
+• **Sleep Schedule**: Tidur dan bangun di waktu yang sama setiap hari
+• **Screen Time**: Hindari gadget 1 jam sebelum tidur
+• **Lingkungan**: Pastikan kamar gelap, sejuk, dan tenang
+• **Relaksasi**: Coba meditasi atau membaca buku sebelum tidur
+• **Hindari kafein**: Terutama setelah jam 2 siang
+
+Sudah berapa lama Anda mengalami masalah tidur ini?`;
+            }
+            
+            // Anxiety-related responses
+            if (lowerMessage.includes('cemas') || lowerMessage.includes('khawatir') || lowerMessage.includes('anxiety')) {
+                return `Kecemasan adalah respons alami, tapi bisa diatasi. Berikut beberapa strategi:
+
+• **Grounding 5-4-3-2-1**: Sebutkan 5 hal yang bisa dilihat, 4 yang bisa disentuh, 3 yang bisa didengar, 2 yang bisa dicium, 1 yang bisa dirasa
+• **Progressive Muscle Relaxation**: Tegang dan lepaskan setiap otot secara bergantian
+• **Journaling**: Tulis kekhawatiran Anda untuk mengeluarkannya dari pikiran
+• **Mindfulness**: Fokus pada saat ini, bukan pada "bagaimana jika"
+
+Apakah kecemasan ini terkait dengan hal tertentu seperti ujian atau presentasi?`;
+            }
+            
+            // Time management responses
+            if (lowerMessage.includes('waktu') || lowerMessage.includes('manajemen') || lowerMessage.includes('organisasi')) {
+                return `Manajemen waktu yang baik sangat penting untuk kesehatan mental. Berikut tips praktis:
+
+• **Teknik Pomodoro**: Kerja 25 menit, istirahat 5 menit
+• **Time Blocking**: Alokasikan waktu khusus untuk setiap aktivitas
+• **Prioritas ABC**: A (harus), B (penting), C (bisa nanti)
+• **Batasi gangguan**: Matikan notifikasi saat fokus
+• **Review harian**: Evaluasi pencapaian di akhir hari
+
+Apa tantangan terbesar Anda dalam mengatur waktu?`;
+            }
+            
+            // Academic pressure responses
+            if (lowerMessage.includes('tugas') || lowerMessage.includes('kuliah') || lowerMessage.includes('akademik')) {
+                return `Tekanan akademik memang challenging. Berikut strategi untuk mengatasinya:
+
+• **Break down tasks**: Bagi tugas besar menjadi bagian kecil
+• **Study groups**: Belajar bersama teman bisa lebih efektif
+• **Seek help**: Jangan ragu tanya dosen atau senior
+• **Self-care**: Jaga keseimbangan antara belajar dan istirahat
+• **Realistic goals**: Set target yang achievable
+
+Apakah ada mata kuliah atau tugas tertentu yang paling membuat stress?`;
+            }
+            
+            // Relationship responses
+            if (lowerMessage.includes('teman') || lowerMessage.includes('hubungan') || lowerMessage.includes('keluarga')) {
+                return `Hubungan interpersonal sangat mempengaruhi kesehatan mental. Beberapa tips:
+
+• **Komunikasi aktif**: Dengarkan dengan empati dan bicara dengan jelas
+• **Set boundaries**: Tetapkan batas yang sehat dalam hubungan
+• **Quality time**: Fokus pada kualitas, bukan kuantitas waktu bersama
+• **Conflict resolution**: Hadapi konflik dengan kepala dingin
+• **Self-reflection**: Evaluasi peran diri dalam hubungan
+
+Apakah ada situasi hubungan tertentu yang ingin Anda diskusikan?`;
+            }
+            
+            // Motivation responses
+            if (lowerMessage.includes('motivasi') || lowerMessage.includes('semangat') || lowerMessage.includes('malas')) {
+                return `Kehilangan motivasi itu normal, tapi bisa diatasi. Mari coba strategi ini:
+
+• **Small wins**: Mulai dari pencapaian kecil yang mudah
+• **Why exercise**: Ingat kembali alasan utama Anda kuliah
+• **Reward system**: Beri hadiah kecil untuk diri sendiri
+• **Inspiring content**: Baca atau tonton konten motivasi
+• **Peer support**: Bergabung dengan grup study atau komunitas
+
+Apa yang biasanya membuat Anda termotivasi di masa lalu?`;
+            }
+            
+            // Default responses
+            const defaultResponses = [
+                "Terima kasih telah berbagi. Bisa ceritakan lebih detail tentang situasi yang Anda alami?",
+                "Saya memahami situasi Anda. Apa yang paling ingin Anda ubah dari kondisi saat ini?",
+                "Itu pasti tidak mudah. Sudah berapa lama Anda merasakan hal ini?",
+                "Saya di sini untuk membantu. Apakah ada strategi yang pernah Anda coba sebelumnya?",
+                "Situasi seperti ini memang challenging. Bagaimana biasanya Anda mengatasi masalah serupa?"
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        // Resources Functions
+        function showResource(resourceId) {
+            document.querySelector('.resources-container').style.display = 'none';
+            document.getElementById('resourceContent').style.display = 'block';
+            
+            const resourceDetails = document.getElementById('resourceDetails');
+            const resources = {
+                'stress-management': {
+                    title: 'Mengelola Stress di Masa Kuliah',
+                    content: `
+                        <h3>Mengelola Stress di Masa Kuliah</h3>
+                        <p><strong>Stress adalah respons alami tubuh terhadap tantangan dan perubahan.</strong> Bagi mahasiswa, stress bisa datang dari berbagai sumber seperti tugas, ujian, atau adaptasi lingkungan baru.</p>
+                        
+                        <h4>Tanda-tanda Stress:</h4>
+                        <ul>
+                            <li>Kesulitan berkonsentrasi</li>
+                            <li>Perubahan pola tidur</li>
+                            <li>Mudah marah atau irritable</li>
+                            <li>Sakit kepala atau ketegangan otot</li>
+                            <li>Perubahan nafsu makan</li>
+                        </ul>
+                        
+                        <h4>Strategi Mengelola Stress:</h4>
+                        <ol>
+                            <li><strong>Time Management:</strong> Buat jadwal yang realistis dan prioritaskan tugas</li>
+                            <li><strong>Teknik Relaksasi:</strong> Latihan pernapasan, meditasi, atau yoga</li>
+                            <li><strong>Olahraga Teratur:</strong> Minimal 30 menit aktivitas fisik per hari</li>
+                            <li><strong>Social Support:</strong> Bicara dengan teman, keluarga, atau konselor</li>
+                            <li><strong>Healthy Lifestyle:</strong> Tidur cukup, makan sehat, batasi kafein</li>
+                        </ol>
+                        
+                        <h4>Kapan Harus Mencari Bantuan:</h4>
+                        <p>Jika stress mulai mengganggu aktivitas sehari-hari, hubungi konselor kampus atau profesional kesehatan mental.</p>
+                    `
+                },
+                'sleep-hygiene': {
+                    title: 'Pentingnya Tidur yang Berkualitas',
+                    content: `
+                        <h3>Pentingnya Tidur yang Berkualitas</h3>
+                        <p><strong>Tidur berkualitas adalah fondasi kesehatan mental dan fisik.</strong> Mahasiswa sering mengabaikan tidur, padahal ini sangat penting untuk performa akademik.</p>
+                        
+                        <h4>Manfaat Tidur Berkualitas:</h4>
+                        <ul>
+                            <li>Meningkatkan konsentrasi dan daya ingat</li>
+                            <li>Memperbaiki mood dan stabilitas emosi</li>
+                            <li>Memperkuat sistem imun</li>
+                            <li>Membantu proses pembelajaran</li>
+                        </ul>
+                        
+                        <h4>Tips Sleep Hygiene:</h4>
+                        <ol>
+                            <li><strong>Konsisten:</strong> Tidur dan bangun di waktu yang sama</li>
+                            <li><strong>Environment:</strong> Kamar gelap, sejuk (18-22°C), dan tenang</li>
+                            <li><strong>Pre-sleep Routine:</strong> Aktivitas menenangkan 30 menit sebelum tidur</li>
+                            <li><strong>Avoid Stimulants:</strong> Tidak kafein 6 jam sebelum tidur</li>
+                            <li><strong>Screen Time:</strong> Matikan gadget 1 jam sebelum tidur</li>
+                        </ol>
+                        
+                        <h4>Jika Masih Sulit Tidur:</h4>
+                        <p>Coba teknik 4-7-8: tarik napas 4 hitungan, tahan 7 hitungan, hembuskan 8 hitungan. Ulangi 4 kali.</p>
+                    `
+                },
+                'social-anxiety': {
+                    title: 'Mengatasi Kecemasan Sosial',
+                    content: `
+                        <h3>Mengatasi Kecemasan Sosial</h3>
+                        <p><strong>Kecemasan sosial adalah ketakutan berlebihan terhadap situasi sosial.</strong> Ini sangat umum di kalangan mahasiswa, terutama saat presentasi atau berkenalan dengan orang baru.</p>
+                        
+                        <h4>Gejala Kecemasan Sosial:</h4>
+                        <ul>
+                            <li>Jantung berdebar saat berbicara di depan umum</li>
+                            <li>Berkeringat atau gemetar</li>
+                            <li>Pikiran kosong saat ditanya</li>
+                            <li>Menghindari aktivitas sosial</li>
+                            <li>Overthinking setelah interaksi sosial</li>
+                        </ul>
+                        
+                        <h4>Strategi Mengatasi:</h4>
+                        <ol>
+                            <li><strong>Gradual Exposure:</strong> Mulai dari situasi sosial yang mudah</li>
+                            <li><strong>Preparation:</strong> Persiapkan topik percakapan atau presentasi</li>
+                            <li><strong>Positive Self-Talk:</strong> Ganti pikiran negatif dengan yang realistis</li>
+                            <li><strong>Breathing Techniques:</strong> Latihan pernapasan sebelum situasi sosial</li>
+                            <li><strong>Focus Outward:</strong> Fokus pada orang lain, bukan pada diri sendiri</li>
+                        </ol>
+                        
+                        <h4>Teknik Grounding 5-4-3-2-1:</h4>
+                        <p>Sebutkan 5 hal yang bisa dilihat, 4 yang bisa disentuh, 3 yang bisa didengar, 2 yang bisa dicium, 1 yang bisa dirasa.</p>
+                    `
+                },
+                'mindfulness': {
+                    title: 'Teknik Mindfulness untuk Pemula',
+                    content: `
+                        <h3>Teknik Mindfulness untuk Pemula</h3>
+                        <p><strong>Mindfulness adalah praktik memusatkan perhatian pada momen sekarang.</strong> Ini membantu mengurangi stress dan meningkatkan kesadaran diri.</p>
+                        
+                        <h4>Manfaat Mindfulness:</h4>
+                        <ul>
+                            <li>Mengurangi kecemasan dan stress</li>
+                            <li>Meningkatkan fokus dan konsentrasi</li>
+                            <li>Meningkatkan kualitas tidur</li>
+                            <li>Mengurangi rumination (pikiran berputar)</li>
+                        </ul>
+                        
+                        <h4>Teknik Dasar untuk Pemula:</h4>
+                        <ol>
+                            <li><strong>Mindful Breathing (5 menit):</strong>
+                                <ul>
+                                    <li>Duduk nyaman, tutup mata</li>
+                                    <li>Fokus pada napas masuk dan keluar</li>
+                                    <li>Jika pikiran wandering, kembali ke napas</li>
+                                </ul>
+                            </li>
+                            <li><strong>Body Scan (10 menit):</strong>
+                                <ul>
+                                    <li>Berbaring rileks</li>
+                                    <li>Fokus pada setiap bagian tubuh dari kaki ke kepala</li>
+                                    <li>Rasakan sensasi tanpa menilai</li>
+                                </ul>
+                            </li>
+                            <li><strong>Mindful Walking:</strong>
+                                <ul>
+                                    <li>Jalan pelan dengan fokus pada kaki</li>
+                                    <li>Rasakan kontak kaki dengan tanah</li>
+                                    <li>Perhatikan lingkungan sekitar</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h4>Tips Praktis:</h4>
+                        <p>Mulai dengan 5 menit sehari, tingkatkan secara bertahap. Gunakan aplikasi meditasi atau timer dengan suara lembut.</p>
+                    `
+                }
+            };
+            
+            const resource = resources[resourceId];
+            if (resource) {
+                resourceDetails.innerHTML = resource.content;
+            }
+        }
+
+        function backToResources() {
+            document.getElementById('resourceContent').style.display = 'none';
+            document.querySelector('.resources-container').style.display = 'block';
+        }
+
+        // Emergency Functions
+        function assessCrisis() {
+            const checkboxes = document.querySelectorAll('#emergencyModal input[type="checkbox"]');
+            const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+            
+            if (checkedCount === 0) {
+                alert('Silakan centang kondisi yang Anda alami atau hubungi konselor jika Anda membutuhkan bantuan.');
+                return;
+            }
+            
+            if (checkedCount >= 2) {
+                alert('Berdasarkan kondisi yang Anda alami, sangat disarankan untuk segera menghubungi konselor darurat atau hotline yang tersedia. Jangan ragu untuk mencari bantuan!');
+                
+                // Auto-open WhatsApp
+                setTimeout(() => {
+                    window.open('https://wa.me/6281234567890?text=Halo%20Dr.%20Sarah,%20saya%20mahasiswa%20Polteksi%20yang%20membutuhkan%20bantuan%20darurat.%20Saya%20sedang%20mengalami%20kondisi%20yang%20memerlukan%20perhatian%20segera.');
+                }, 2000);
+            } else {
+                alert('Meskipun hanya satu kondisi yang dialami, penting untuk tetap waspada. Pertimbangkan untuk melakukan konsultasi preventif dengan konselor.');
+            }
+        }
+
+        // Utility Functions
+        function animateCounter(elementId, target, duration = 2000) {
+            const element = document.getElementById(elementId);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                
+                if (elementId === 'satisfaction') {
+                    element.textContent = current.toFixed(1);
+                } else if (elementId === 'response') {
+                    element.textContent = '< 24h';
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate statistics
+            setTimeout(() => {
+                animateCounter('totalUsers', 1247);
+                animateCounter('totalSessions', 3891);
+                animateCounter('satisfaction', 4.8);
+            }, 1000);
+            
+            // Add some sample data for demo
+            currentUser.moodHistory = [
+                { date: '2024-06-10', mood: 'happy', energy: 7, note: 'Hari yang produktif!' },
+                { date: '2024-06-11', mood: 'neutral', energy: 5, note: 'Biasa saja' },
+                { date: '2024-06-12', mood: 'sad', energy: 3, note: 'Stress dengan tugas' },
+                { date: '2024-06-13', mood: 'happy', energy: 8, note: 'Tugas selesai!' },
+                { date: '2024-06-14', mood: 'very-happy', energy: 9, note: 'Dapat nilai bagus' },
+                { date: '2024-06-15', mood: 'neutral', energy: 6, note: 'Hari santai' },
+                { date: '2024-06-16', mood: 'happy', energy: 7, note: 'Belajar dengan teman' }
+            ];
+            
+            currentUser.journalEntries = [
+                {
+                    date: '2024-06-15',
+                    title: 'Refleksi Minggu Ini',
+                    content: 'Minggu ini cukup menantang dengan berbagai tugas dan deadline. Namun saya belajar banyak tentang manajemen waktu dan prioritas. Merasa lebih percaya diri menghadapi tantangan.',
+                    gratitude: '1. Kesehatan yang baik\n2. Dukungan keluarga\n3. Teman-teman yang membantu',
+                    tomorrow: 'Menyelesaikan laporan praktikum dan mempersiapkan presentasi'
+                },
+                {
+                    date: '2024-06-14',
+                    title: 'Hari yang Menyenangkan',
+                    content: 'Hari ini mendapat nilai bagus untuk tugas yang kemarin dikumpulkan. Merasa lega dan senang karena usaha keras membuahkan hasil.',
+                    gratitude: '1. Nilai yang memuaskan\n2. Dosen yang supportif\n3. Proses belajar yang menyenangkan',
+                    tomorrow: 'Istirahat dan me-time'
+                }
+            ];
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add floating animation to emergency button
+            const emergencyBtn = document.querySelector('.emergency-btn');
+            setInterval(() => {
+                emergencyBtn.style.transform = 'translateY(-2px)';
+                setTimeout(() => {
+                    emergencyBtn.style.transform = 'translateY(0)';
+                }, 500);
+            }, 3000);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Escape key to close modals
+            if (e.key === 'Escape') {
+                const openModal = document.querySelector('.modal[style*="block"]');
+                if (openModal) {
+                    openModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+            
+            // Ctrl+M to open mood tracker
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                openModal('moodModal');
+            }
+            
+            // Ctrl+J to open journal
+            if (e.ctrlKey && e.key === 'j') {
+                e.preventDefault();
+                openModal('journalModal');
+            }
+            
+            // Ctrl+C to open chatbot
+            if (e.ctrlKey && e.key === 'c') {
+                e.preventDefault();
+                openModal('chatbotModal');
+            }
+        });
+
+        // Service Worker for offline functionality (basic)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(console.error);
+        }
+
+        // Add notification support
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        }
+
+        // Daily mood reminder
+        function scheduleMoodReminder() {
+            const now = new Date();
+            const reminderTime = new Date();
+            reminderTime.setHours(20, 0, 0, 0); // 8 PM reminder
+            
+            if (now > reminderTime) {
+                reminderTime.setDate(reminderTime.getDate() + 1);
+            }
+            
+            const timeUntilReminder = reminderTime.getTime() - now.getTime();
+            
+            setTimeout(() => {
+                if (Notification.permission === 'granted') {
+                    new Notification('Polteksi Mental Health', {
+                        body: 'Jangan lupa catat mood Anda hari ini! 😊',
+                        icon: '/icon-192x192.png'
+                    });
+                }
+                
+                // Schedule next reminder
+                scheduleMoodReminder();
+            }, timeUntilReminder);
+        }
+
+        // Initialize notifications
+        setTimeout(() => {
+            requestNotificationPermission();
+            scheduleMoodReminder();
+        }, 5000);
+    </script>
+</body>
+</html>
+
